@@ -1,8 +1,7 @@
 #
-# Cookbook Name:: apt
-# Resource:: preference
-#
-# Copyright 2010-2013, Opscode, Inc.
+# Author:: Seth Chisamore (<schisamo@opscode.com>)
+# Copyright:: Copyright (c) 2011 Opscode, Inc.
+# License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,16 +16,19 @@
 # limitations under the License.
 #
 
-actions :add, :remove
-default_action :add if defined?(default_action) # Chef > 10.8
+require File.join(File.dirname(__FILE__), 'resource_database')
+require File.join(File.dirname(__FILE__), 'provider_database_sql_server')
 
-# Needed for Chef versions < 0.10.10
-def initialize(*args)
-  super
-  @action = :add
+class Chef
+  class Resource
+    class SqlServerDatabase < Chef::Resource::Database
+
+      def initialize(name, run_context=nil)
+        super
+        @resource_name = :sql_server_database
+        @provider = Chef::Provider::Database::SqlServer
+      end
+
+    end
+  end
 end
-
-attribute :package_name, :kind_of => String, :name_attribute => true
-attribute :glob, :kind_of => String
-attribute :pin, :kind_of => String
-attribute :pin_priority, :kind_of => String
