@@ -46,7 +46,7 @@ end
 
 # import an sql dump from your app_root/data/dump.sql to the my_database database
 execute "import" do
-  command "mysql -u root -p\"#{node['mysql']['server_root_password']}\" my_database < /var/www/thornwood/data/thornwood.sql"
+  command "mysql -u root -p\"#{node['mysql']['server_root_password']}\" thornwood < /var/www/thornwood/data/thornwood.sql"
   action :run
 end
 
