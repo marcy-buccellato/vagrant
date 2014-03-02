@@ -39,7 +39,7 @@ mysql_database_user 'thornwood' do
   password      'UeOWq3SW'
   database_name 'thornwood'
   host          '%'
-  privileges    [:select,:update,:insert]
+  privileges    [:all]
   action        :grant
 end
 
