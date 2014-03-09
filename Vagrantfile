@@ -76,6 +76,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.cookbooks_path = "chef/cookbooks"
     chef.roles_path = "chef/roles"
     chef.data_bags_path = "chef/data_bags"
+    chef.add_recipe "ubuntu"
     chef.add_recipe "apt"
     chef.add_recipe "build-essential"
     chef.add_recipe "emacs"
