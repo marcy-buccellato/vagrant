@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ciaopetro"
+  config.vm.box = "precise64"
 
   # virtualbox setup config
   config.vm.provider "virtualbox" do |vb|
@@ -23,6 +23,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # override default box and url it is downloaded from
     override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
     # config.vm.box_url = "/vagrant_files/precise64_vmware.box"
+    v.vmx["memsize"] = "2048"
+    v.vmx["numvcpus"] = "2"
 
   end
 
@@ -77,8 +79,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.roles_path = "chef/roles"
     chef.data_bags_path = "chef/data_bags"
     chef.add_recipe "ubuntu"
-    chef.add_recipe "apt"
     chef.add_recipe "build-essential"
+    chef.add_recipe "apt"
     chef.add_recipe "emacs"
     chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "apache2::mod_rewrite"
